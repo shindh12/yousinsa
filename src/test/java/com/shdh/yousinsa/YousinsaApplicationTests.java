@@ -1,8 +1,11 @@
 package com.shdh.yousinsa;
 
 import com.shdh.yousinsa.domain.product.ProductID;
+import com.shdh.yousinsa.domain.shop.Shop;
+import com.shdh.yousinsa.domain.user.Coupon;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,5 +19,6 @@ class YousinsaApplicationTests {
 
         assertThat(id1).isEqualTo(id2);
     }
+
 
 }
