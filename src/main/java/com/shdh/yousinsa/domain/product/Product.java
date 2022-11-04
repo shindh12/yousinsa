@@ -2,8 +2,6 @@ package com.shdh.yousinsa.domain.product;
 
 import com.shdh.yousinsa.domain.shop.Shop;
 import com.shdh.yousinsa.domain.stock.Stock;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -28,6 +26,7 @@ public class Product {
     private Option sizeOption;
     private int like;
     private String description;
+    private Stock stock;
 
 
     public LocalDate getEstimatedDeliveryDate(){
@@ -38,12 +37,12 @@ public class Product {
         return this.stock.getQuantity();
     }
 
-    public Double getTotalPrice(){
-        return price.value() - getDiscountedPrice();
+    public Price getTotalPrice(){
+        return price.subtract(getDiscountedPrice());
     }
 
-    public Double getDiscountedPrice(){
-        return price.value() * discountRate;
+    public Price getDiscountedPrice(){
+        return Price.of(price.value() * discountRate);
     }
 
     @Getter
@@ -52,16 +51,15 @@ public class Product {
         하의("BOTTOM", Set.of("aa", "bb")),
         악세사리("ACC", Set.of("bb", "cc"));
 
+        private final String depth1;
+        private final Set<String> depth2;
+        private final Map<String, ProductCategory> map = Arrays.stream(ProductCategory.values())
+                .collect(Collectors.toMap(ProductCategory::getDepth1, Function.identity()));
+
         ProductCategory(String depth1, Set<String> depth2) {
             this.depth1 = depth1;
             this.depth2 = depth2;
         }
-
-        private final String depth1;
-        private final Set<String> depth2;
-
-        private final Map<String, ProductCategory> map = Arrays.stream(ProductCategory.values())
-                .collect(Collectors.toMap(ProductCategory::getDepth1, Function.identity()));
 
         public ProductCategory of(String code) {
             return map.get(code);

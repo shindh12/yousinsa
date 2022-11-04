@@ -1,4 +1,10 @@
 package com.shdh.yousinsa.domain.user;
 
-public class Point {
+import com.shdh.yousinsa.domain.product.Price;
+
+public record Point(long value) {
+
+    public Price toPrice() {
+        return new Price(value);
+    }
 }
