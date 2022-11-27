@@ -4,6 +4,7 @@ import com.shdh.yousinsa.application.product.port.in.ReadProductInPort;
 import com.shdh.yousinsa.application.product.port.in.ReadProductSearchCondition;
 import com.shdh.yousinsa.application.product.port.out.ReadProductOutPort;
 import com.shdh.yousinsa.domain.product.Product;
+import com.shdh.yousinsa.domain.product.ProductID;
 
 import java.util.List;
 
@@ -17,5 +18,10 @@ public class ReadProductListUseCase implements ReadProductInPort {
     @Override
     public List<Product> getProducts(ReadProductSearchCondition searchCondition) {
         return readProductOutPort.getProductList(searchCondition);
+    }
+
+    @Override
+    public Product getProduct(ProductID productID) {
+        return readProductOutPort.getProductById(productID);
     }
 }
