@@ -1,5 +1,6 @@
 package com.shdh.yousinsa.domain.user;
 
+import com.shdh.yousinsa.domain.payment.PaymentMethod;
 import lombok.Getter;
 
 import java.util.List;
@@ -25,50 +26,9 @@ public class User {
         String detailAddress;
     }
 
-    static class PaymentMethod {
-        PaymentType type;
-        Payment payment;
-
-        public String getPaymentId() {
-            return payment.getId();
-        }
-    }
-
-    static class CardPayment implements Payment {
-
-        String cardNum;
-        String cardCompany;
-        int expireYear;
-        int expireMonth;
-
-        @Override
-        public String getId() {
-            return cardNum;
-        }
-    }
-
-    static class EfinPayment implements Payment {
-        String accountId;
-        EfinType type;
-
-        @Override
-        public String getId() {
-            return accountId;
-        }
-
-        enum EfinType {
-            NAVER, KAKAOPAY
-        }
-    }
-    interface Payment {
-        String getId();
-    }
 
     enum Gender{
         MAN, WOMEN
     }
 
-    enum PaymentType {
-        CARD, EFIN
-    }
 }
