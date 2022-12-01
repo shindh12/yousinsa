@@ -46,7 +46,7 @@ public class Product {
     }
 
     @Getter
-    enum ProductCategory {
+    public enum ProductCategory {
         상의("TOP", Set.of("dd", "dd")),
         하의("BOTTOM", Set.of("aa", "bb")),
         악세사리("ACC", Set.of("bb", "cc"));
