@@ -18,6 +18,7 @@ import static org.springframework.restdocs.payload.JsonFieldType.STRING;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserPaymentController.class)
@@ -43,6 +44,7 @@ public class UserPaymentControllerTest {
         // then
         mockMvc.perform(get("/user/{userID}/payment", userID.value()))
                 .andExpect(status().isOk())
+                .andDo(print())
                 .andDo(document("get-user-payment",
                         pathParameters(
                                 parameterWithName("userID").description("결제 수단 소유 유저 아이디")
