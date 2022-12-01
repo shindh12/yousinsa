@@ -6,21 +6,23 @@ import com.shdh.yousinsa.domain.product.ProductID;
 import com.shdh.yousinsa.domain.user.UserID;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component("LikeJpaAdapter")
 public class LikeJpaAdapter implements LikeOutPort {
 
     @Override
-    public UserLike getUserLike(ProductID productID, UserID userId) {
-        return null;
+    public Optional<UserLike> getUserLike(ProductID productID, UserID userId) {
+        return Optional.empty();
     }
 
     @Override
     public void create(UserLike userLike) {
-
+        //test
     }
 
     @Override
     public void updateLike(UserLike userLike) {
-
+        //test
     }
 }

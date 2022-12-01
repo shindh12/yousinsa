@@ -9,7 +9,7 @@ public class UserLike {
     private ProductID productID;
     private boolean like;
 
-    @Builder
+    @Builder(toBuilder = true)
     UserLike(UserID userId, ProductID productID, boolean like) {
         this.userId = userId;
         this.productID = productID;
@@ -26,9 +26,7 @@ public class UserLike {
     }
 
     public UserLike toggled(){
-        return UserLike.builder()
-                .userId(this.userId)
-                .productID(this.productID)
+        return this.toBuilder()
                 .like(!this.like)
                 .build();
     }

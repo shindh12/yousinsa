@@ -7,7 +7,6 @@ import com.shdh.yousinsa.domain.product.ProductID;
 import com.shdh.yousinsa.domain.user.UserID;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 @Service
 public class LikeUseCase implements LikeInPort {
@@ -20,13 +19,9 @@ public class LikeUseCase implements LikeInPort {
 
     @Override
     public void handleLike(ProductID productId, UserID userId) {
-        var retrievedUserLike = likeOutPort.getUserLike(productId, userId);
-        if(ObjectUtils.isEmpty(retrievedUserLike)) {
-            likeOutPort.create(UserLike.createNew(productId, userId));
-            return;
-        }
-
-        var toggledUserLike = retrievedUserLike.toggled();
-        likeOutPort.updateLike(toggledUserLike);
+        likeOutPort.getUserLike(productId, userId)
+                .ifPresentOrElse(
+                        userLike -> likeOutPort.updateLike(userLike.toggled()),
+                        () -> likeOutPort.create(UserLike.createNew(productId, userId)));
     }
 }
