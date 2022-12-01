@@ -8,9 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class ReadUserPaymentUsecase implements ReadUserPaymentInPort {
     private final ReadUserPaymentOutPort readUserPaymentOutPort;
+
+    public ReadUserPaymentUsecase(ReadUserPaymentOutPort readUserPaymentOutPort) {
+        this.readUserPaymentOutPort = readUserPaymentOutPort;
+    }
 
     @Override
     public PaymentMethod getUserPayment(UserID userID) {
